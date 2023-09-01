@@ -90,14 +90,20 @@ gini_graph <-  ggplot() + geom_abline(slope=1,intercept=0) +
 
 gini_viz <- arrangeGrob(perfect,unequal,lorenz,gini_graph,top="How to calculate the Gini Coefficient")
 ggsave("02_Figures/gini_viz.pdf",gini_viz,width = 12.8,height = 8,units="in")
+
+
 #Histograma
-ggplot(ingresos)+
+income.hist <- ggplot(ingresos)+
   geom_histogram(aes(x=sueldo_tabular_bruto),
-                 fill=wes_palette(n=1, name="GrandBudapest1"),bins=50)+
+                ,bins=50)+
   scale_x_continuous(labels=scales::dollar_format())+
   labs(x="Sueldo bruto ($ MXN)",y="Frecuencia",
-       title="La distribución de los sueldos de la CDMX está sesgado a la derecha")+
+       title="La distribución de los sueldos de la CDMX está sesgada a la derecha")+
   theme_classic()
+
+ggsave("02_Figures/income_histogram.pdf")
+
+
 #Calcule con qué porcentaje del ingreso se queda el: 0.1 % con mayores ingresos, el 1 % con mayores
 # ingresos, el 5 % con mayores ingresos y el 10 % con mayores ingresos.
 percentil <- c(0.999,0.99,0.95,0.9)
@@ -136,5 +142,6 @@ distribucion_ingreso <- data.frame(
     top_10/total_ingresos
   )*100
 )
+
 
 

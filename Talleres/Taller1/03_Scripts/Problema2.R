@@ -15,14 +15,14 @@ carpetas <- rbind(carpetas1,carpetas2)
 
 #Tomemos solo eventos del 2000 para acá
 
-crimen_post2017 <- carpetas %>% 
-  filter(fecha_hecho > "2017-12-31") %>%
+crimen_post2018 <- carpetas %>% 
+  filter(fecha_hecho > "2018-12-31") %>%
   group_by(day = lubridate::floor_date(fecha_hecho, "day")) %>% summarise(eventos = n())
 
-crimen_post2017.week <- carpetas %>% 
-  filter(fecha_hecho > "2017-12-31") %>%
+crimen_post2018.week <- carpetas %>% 
+  filter(fecha_hecho > "2018-12-31") %>%
   group_by(semana = lubridate::floor_date(fecha_hecho, "week")) %>% summarise(eventos = n())
-ggplot(crimen_post2010.week) + geom_line(aes(x=semana,y=eventos))
+ggplot(crimen_post2018.week) + geom_line(aes(x=semana,y=eventos))
 
 
 #Delitos comunes
