@@ -1,15 +1,4 @@
 ## Problema 3 - Desigualdad de ingresos
-#install.packages("REAT")
-#install.packages("wesanderson")
-library(REAT)
-library(ggtext)
-library(readr)
-library(dplyr)
-library(ggplot2)
-library(scales)
-library(DescTools)
-library(stringr)
-library(gridExtra)
 
 #Jalamos los datos
 ingresos <- read_csv("https://datos.cdmx.gob.mx/dataset/52f97506-ef52-449a-b2c9-29b6197abaa6/resource/7f0d7073-6861-4d8c-9ca5-17ebe3ff2388/download/remuneraciones_da_qna_10_23.csv")

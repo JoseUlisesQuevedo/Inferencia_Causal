@@ -1,7 +1,3 @@
-library(ggplot2)
-library(gridExtra)
-library(latex2exp)
-
 set.seed(189442)
 
 #Normal
