@@ -95,35 +95,16 @@ ggsave("02_Figures/income_histogram.pdf")
 
 #Calcule con qué porcentaje del ingreso se queda el: 0.1 % con mayores ingresos, el 1 % con mayores
 # ingresos, el 5 % con mayores ingresos y el 10 % con mayores ingresos.
-percentil <- c(0.999,0.99,0.95,0.9)
-cuantiles <- quantile(ingresos$sueldo_tabular_bruto,percentil)
-
-top_punto_1 <- ingresos %>% 
-                select(sueldo_tabular_bruto) %>% 
-                filter(sueldo_tabular_bruto>cuantiles[1])%>%
-                sum()
-
-top_1 <- ingresos %>% 
-  select(sueldo_tabular_bruto) %>% 
-  filter(sueldo_tabular_bruto>cuantiles[2])%>%
-  sum()
-
-top_5 <- ingresos %>% 
-  select(sueldo_tabular_bruto) %>% 
-  filter(sueldo_tabular_bruto>cuantiles[3])%>%
-  sum()
-
-top_10 <- ingresos %>% 
-  select(sueldo_tabular_bruto) %>% 
-  filter(sueldo_tabular_bruto>cuantiles[4])%>%
-  sum()
-  
-
+percentil <- c(0.001,0.01,0.05,0.1)
 total_ingresos <- sum(ingresos$sueldo_tabular_bruto)
-top_5/total_ingresos
+
+top_punto_1 <- ingresos %>% top_frac(sueldo_tabular_bruto,n=0.001) %>% summarise(valor=sum(sueldo_tabular_bruto)) %>% pull()
+top_1 <- ingresos %>% top_frac(sueldo_tabular_bruto,n=0.01) %>% summarise(valor=sum(sueldo_tabular_bruto)) %>% pull()
+top_5 <- ingresos %>% top_frac(sueldo_tabular_bruto,n=0.05) %>% summarise(valor=sum(sueldo_tabular_bruto)) %>% pull()
+top_10 <- ingresos %>% top_frac(sueldo_tabular_bruto,n=0.1) %>% summarise(valor=sum(sueldo_tabular_bruto)) %>% pull()
 ##Tablita: 
 distribucion_ingreso <- data.frame(
-  top_porcentaje = (1-percentil)*100,
+  top_porcentaje = percentil,
   porcentaje_ingresos = c(
     top_punto_1/total_ingresos,
     top_1/total_ingresos,
